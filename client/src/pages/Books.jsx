@@ -9,7 +9,7 @@ function Books() {
     useEffect(()=>{
         const fetchAllBooks = async () => {
             try{
-                const res= await axios.get("http://localhost:8800/books")
+                const res= await axios.get("https://crud-app-apis.onrender.com/books")
                 console.log(res)
                 setBooks(res.data);
             }catch(err){

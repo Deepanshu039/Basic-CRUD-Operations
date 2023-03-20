@@ -27,7 +27,7 @@ function Update() {
     const handleAdd=async (e)=>{
         e.preventDefault()
         try{
-            await axios.put("http://localhost:8800/books/" + bookId, book)
+            await axios.put("https://crud-app-apis.onrender.com/books/" + bookId, book)
             navigate("/");
         }catch(err){
             console.log(err)
