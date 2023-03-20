@@ -21,7 +21,7 @@ function Books() {
 
     const handleDelete=async (id)=>{
         try{
-            await axios.delete("http://localhost:8800/books/"+id)
+            await axios.delete("https://crud-app-apis.onrender.com/books/"+id)
             window.location.reload()
         }catch(err){
             console.log(err)
