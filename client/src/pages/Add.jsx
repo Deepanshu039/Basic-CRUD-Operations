@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Add() {
 
@@ -10,6 +10,7 @@ function Add() {
         price: null,
         cover: "",
     });
+    const [error,setError] = useState(false)
 
     const navigate = useNavigate();
 
@@ -19,28 +20,50 @@ function Add() {
     
     console.log(book);
 
-    const handleAdd=async (e)=>{
+    const handleClick=async (e)=>{
         e.preventDefault()
         try{
             await axios.post("https://crud-app-apis.onrender.com/books", book)
             navigate("/");
         }catch(err){
             console.log(err)
+            setError(true);
         }
     }
 
   return (
-    <div>
-        <div className="form">
-            <h1>Add New Book</h1>
-            <input type="text" placeholder='title' onChange={handleChange} name='title'/>
-            <input type="text" placeholder='desc' onChange={handleChange}  name='desc'/>
-            <input type="number" placeholder='price' onChange={handleChange} name='price'/>
-            <input type="text" placeholder='cover' onChange={handleChange}  name='cover'/>
-            <button onClick={handleAdd}>Add</button>
-        </div>
+    <div className="form">
+      <h1>Add New Book</h1>
+      <input
+        type="text"
+        placeholder="Book title"
+        name="title"
+        onChange={handleChange}
+      />
+      <textarea
+        rows={5}
+        type="text"
+        placeholder="Book desc"
+        name="desc"
+        onChange={handleChange}
+      />
+      <input
+        type="number"
+        placeholder="Book price"
+        name="price"
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        placeholder="Book cover"
+        name="cover"
+        onChange={handleChange}
+      />
+      <button onClick={handleClick}>Add</button>
+      {error && "Something went wrong!"}
+      <Link to="/">See all books</Link>
     </div>
   )
 }
 
-export default Add
+export default Add;

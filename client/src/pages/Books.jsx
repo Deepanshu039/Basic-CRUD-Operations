@@ -36,7 +36,7 @@ function Books() {
 
   return (
     <div>
-        <h1>Lama Book Shop</h1>
+        <h1>Painter Book Shop</h1>
         <div className="books">
             {
                 books.map((book)=> (
@@ -52,9 +52,11 @@ function Books() {
             }
         </div>
 
-        <button>
-            <Link to="/add">Add new book</Link>
-        </button>
+        <button className="addHome">
+        <Link to="/add" style={{ color: "inherit", textDecoration: "none" }}>
+          Add new book
+        </Link>
+      </button>
     </div>
   )
 }

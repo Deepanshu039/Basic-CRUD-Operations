@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import {Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Update() {
 
@@ -10,6 +10,7 @@ function Update() {
         price: null,
         cover: "",
     });
+    const [error,setError] = useState(false)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -24,27 +25,49 @@ function Update() {
     
     console.log(book);
 
-    const handleAdd=async (e)=>{
+    const handleClick=async (e)=>{
         e.preventDefault()
         try{
             await axios.put("https://crud-app-apis.onrender.com/books/" + bookId, book)
             navigate("/");
         }catch(err){
             console.log(err)
+            setError(true);
         }
     }
 
   return (
-    <div>
-        <div className="form">
-            <h1>Update the Book</h1>
-            <input type="text" placeholder='title' onChange={handleChange} name='title'/>
-            <input type="text" placeholder='desc' onChange={handleChange}  name='desc'/>
-            <input type="number" placeholder='price' onChange={handleChange} name='price'/>
-            <input type="text" placeholder='cover' onChange={handleChange}  name='cover'/>
-            <button onClick={handleAdd}>Update</button>
-        </div>
-    </div>
+    <div className="form">
+    <h1>Update the Book</h1>
+    <input
+      type="text"
+      placeholder="Book title"
+      name="title"
+      onChange={handleChange}
+    />
+    <textarea
+      rows={5}
+      type="text"
+      placeholder="Book desc"
+      name="desc"
+      onChange={handleChange}
+    />
+    <input
+      type="number"
+      placeholder="Book price"
+      name="price"
+      onChange={handleChange}
+    />
+    <input
+      type="text"
+      placeholder="Book cover"
+      name="cover"
+      onChange={handleChange}
+    />
+    <button onClick={handleClick}>Update</button>
+    {error && "Something went wrong!"}
+    <Link to="/">See all books</Link>
+  </div>
   )
 }
 
