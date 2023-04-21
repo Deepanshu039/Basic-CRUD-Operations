@@ -10,6 +10,7 @@ dotenv.config();
 // console.log(process.env.DATABASE_URL);
 
 const db = mysql.createConnection(process.env.DATABASE_URL);
+// console.log(process.env.DATABASE_URL);
 
 // const db = mysql.createConnection({
 //     host: "localhost",
@@ -23,7 +24,7 @@ app.use(cors());
 
 db.connect(function (err) {
   if (err) throw err;
-  console.log("Connected!!!");
+  console.log("Connected to the DB!!!");
 });
 
 app.get("/", (req, res) => {
